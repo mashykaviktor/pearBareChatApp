@@ -1,0 +1,26 @@
+{
+  "name": "pearbare",
+  "main": "index.js",
+  "pear": {
+    "name": "terminal",
+    "type": "terminal"
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pear run -d .",
+    "test": "brittle test/*.test.js"
+  },
+  "devDependencies": {
+    "brittle": "^3.7.0",
+    "pear-interface": "^1.0.3"
+  },
+  "dependencies": {
+    "b4a": "1.6.7",
+    "bare-process": "3.0.0",
+    "bare-readline": "1.0.6",
+    "bare-tty": "4.0.2",
+    "hypercore-crypto": "3.4.2",
+    "hyperswarm": "4.8.4"
+  }
+}
