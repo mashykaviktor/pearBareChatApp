@@ -8,15 +8,16 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Platform,
+  ImageBackground,
 } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
+import { styles } from "./styles";
 import { useBackend } from "../../component/BareProvider";
 import { createMessage } from "../../lib/message";
 import uiEvent, { CONNECTIONS_UI, RECEIVE_MESSAGE_UI } from "../../lib/uiEvent";
-import { styles } from "./styles";
+import MessageInput from "../../component/MessageInput";
+import MessageList from "../../component/MessageList";
 import {
   getMessages,
   getInputText,
@@ -86,6 +87,7 @@ export const HomeScreen = () => {
     if (inputText.trim()) {
       backend.sendMessage(inputText, appendMessage);
       dispatch(setInputText(""));
+      Keyboard.dismiss();
     }
   };
 
@@ -98,83 +100,67 @@ export const HomeScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+    <ImageBackground
+      source={require("../../../assets/bg.jpg")}
+      style={styles.backgroundImage}
     >
-      {roomTopic ? (
-        <>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.innerContainer}>
-              <View style={styles.messageList}>
-                <Text selectable>Topic: {roomTopic}</Text>
-                <Text>Peers: {peersCount}</Text>
-                {Array.isArray(messages) &&
-                  messages.map((event, idx) => (
-                    <View
-                      key={idx}
-                      style={
-                        event.local
-                          ? [styles.message, styles.myMessage]
-                          : styles.message
-                      }
-                    >
-                      <Text style={styles.member}>
-                        {event?.memberId ?? "You"}
-                      </Text>
-                      <Text selectable>{event.message}</Text>
-                    </View>
-                  ))}
-              </View>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+      >
+        {roomTopic ? (
+          <View style={styles.innerContainer}>
+            <View style={styles.topicContainer}>
+              <Text selectable style={styles.topicText}>
+                Topic: <Text style={styles.topicHighlight}>{roomTopic}</Text>
+              </Text>
+              <Text style={styles.peersText}>
+                Peers: <Text style={styles.peersCount}>{peersCount}</Text>
+              </Text>
             </View>
-          </TouchableWithoutFeedback>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.msgInput}
-              placeholder="Say something"
-              value={inputText}
-              onChangeText={handleInputChange}
+            <MessageList messages={messages} />
+            <MessageInput
+              inputText={inputText}
+              handleInputChange={handleInputChange}
+              handleSend={handleSend}
             />
-            <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
-              <MaterialIcons name="send" size={16} color="white" />
-            </TouchableOpacity>
           </View>
-        </>
-      ) : (
-        <View style={styles.innerContainer}>
-          <View style={styles.info}>
-            <Text>
-              Open up src/screen/HomeScreen.js to start working on your app!
-            </Text>
-            <Text>
-              FYR lib/rpc and worklet/app.cjs has related backend code.
-            </Text>
-          </View>
-          <TouchableOpacity
-            style={[styles.message, styles.sendButton]}
-            onPress={handleCreate}
-          >
-            <Text>Create Room</Text>
-          </TouchableOpacity>
-          <Text>Or</Text>
-          <View style={styles.buttonGroup}>
-            <TextInput
-              value={roomTopicIn}
-              onChangeText={handleRoomTopicInChange}
-              style={styles.textInput}
-            />
+        ) : (
+          <View style={styles.innerContainer}>
             <TouchableOpacity
               style={[styles.message, styles.sendButton]}
-              onPress={handleJoin}
+              onPress={handleCreate}
             >
-              <Text>Join Room</Text>
+              <Text>Create Room</Text>
             </TouchableOpacity>
+            <Text>Or</Text>
+            <View style={styles.buttonGroup}>
+              <TextInput
+                value={roomTopicIn}
+                onChangeText={handleRoomTopicInChange}
+                style={styles.textInput}
+              />
+              <TouchableOpacity
+                style={[styles.message, styles.sendButton]}
+                onPress={handleJoin}
+              >
+                <Text>Join Room</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.info}>
+              <Text>
+                Open up src/screen/HomeScreen.js to start working on your app!
+              </Text>
+              <Text>
+                FYR lib/rpc and worklet/app.cjs has related backend code.
+              </Text>
+            </View>
           </View>
-        </View>
-      )}
-      <StatusBar style="auto" />
-    </KeyboardAvoidingView>
+        )}
+        <StatusBar style="auto" />
+      </KeyboardAvoidingView>
+    </ImageBackground>
   );
 };
 

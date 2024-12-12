@@ -1277,7 +1277,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - "react-native-bare-kit (0.3.0+107129)":
+  - "react-native-bare-kit (0.3.0+6f7940)":
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1835,7 +1835,7 @@ SPEC CHECKSUMS:
   React-logger: 26155dc23db5c9038794db915f80bd2044512c2e
   React-Mapbuffer: ad1ba0205205a16dbff11b8ade6d1b3959451658
   React-microtasksnativemodule: 36e3a415c6a3a5c4784b5c6bad38013b8ca35be4
-  react-native-bare-kit: 0c9172af67f989f3df6fcbd3a9612f3280009b41
+  react-native-bare-kit: c72ca28480b5adc7101fea930be125128fee0c65
   React-nativeconfig: aeed6e2a8ac02b2df54476afcc7c663416c12bf7
   React-NativeModulesApple: c5b7813da94136f50ef084fa1ac077332dcfc658
   React-perflogger: 6afb7eebf7d9521cc70481688ccddf212970e9d3

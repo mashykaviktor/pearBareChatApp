@@ -1,13 +1,19 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+  },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   innerContainer: {
     flex: 1,
     padding: 10,
+    paddingTop: 48,
+    justifyContent: "center",
   },
   messageList: {
     paddingVertical: 10,
@@ -22,30 +28,6 @@ export const styles = StyleSheet.create({
   myMessage: {
     alignSelf: "flex-end",
     backgroundColor: "#AAA",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: "#fff",
-    borderTopWidth: 1,
-    borderTopColor: "#ccc",
-  },
-  msgInput: {
-    flex: 1,
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    marginRight: 10,
-    backgroundColor: "#f9f9f9",
-  },
-  sendButton: {
-    backgroundColor: "#0aa",
-    padding: 10,
-    borderRadius: 20,
   },
   buttonGroup: {
     flexDirection: "row",
@@ -66,5 +48,61 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     gap: 8,
+  },
+
+  messageBubble: {
+    maxWidth: "80%",
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 10,
+  },
+  myMessageBubble: {
+    alignSelf: "flex-end",
+    backgroundColor: "#D1E7DD",
+  },
+  theirMessageBubble: {
+    alignSelf: "flex-start",
+    backgroundColor: "#F8D7DA",
+  },
+  messageText: {
+    fontSize: 16,
+    color: "#333",
+  },
+  timestamp: {
+    fontSize: 12,
+    color: "#888",
+    textAlign: "right",
+    marginTop: 5,
+  },
+
+  topicContainer: {
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 10,
+    backgroundColor: "#F0F0F0",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  topicText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 5,
+  },
+  topicHighlight: {
+    color: "#007AFF",
+    fontWeight: "semibold",
+  },
+  peersText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#555",
+  },
+  peersCount: {
+    color: "#28A745",
+    fontWeight: "bold",
   },
 });
