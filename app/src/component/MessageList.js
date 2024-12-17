@@ -38,12 +38,6 @@ const renderMessage = ({ item }) => {
 const MessageList = ({ messages }) => {
   const flatListRef = useRef(null);
 
-  useEffect(() => {
-    if (flatListRef.current) {
-      flatListRef.current.scrollToEnd({ animated: true });
-    }
-  }, [messages]);
-
   return (
     <FlatList
       ref={flatListRef}
@@ -55,13 +49,13 @@ const MessageList = ({ messages }) => {
           No messages yet. Start the conversation!
         </Text>
       }
-      getItemLayout={(data, index) => ({
-        length: 50,
-        offset: 50 * index,
-        index,
-      })}
       initialNumToRender={20}
-      contentContainerStyle={{ flexGrow: 1, paddingBottom: 10 }}
+      // Scroll to end when content size changes
+      onContentSizeChange={() => {
+        if (flatListRef.current) {
+          flatListRef.current.scrollToEnd({ animated: true });
+        }
+      }}
     />
   );
 };

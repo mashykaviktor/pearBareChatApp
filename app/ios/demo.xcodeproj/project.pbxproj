@@ -260,7 +260,7 @@
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/react-native-bare-kit/bare-os.3.3.0.framework/bare-os.3.3.0",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/react-native-bare-kit/bare-url.2.1.0.framework/bare-url.2.1.0",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/react-native-bare-kit/sodium-native.4.3.1.framework/sodium-native.4.3.1",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/react-native-bare-kit/udx-native.1.16.1.framework/udx-native.1.16.1",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/react-native-bare-kit/udx-native.1.16.2.framework/udx-native.1.16.2",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -270,7 +270,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bare-os.3.3.0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bare-url.2.1.0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sodium-native.4.3.1.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/udx-native.1.16.1.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/udx-native.1.16.2.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
