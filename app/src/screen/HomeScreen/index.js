@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -18,6 +18,7 @@ import { createMessage } from "../../lib/message";
 import uiEvent, { CONNECTIONS_UI, RECEIVE_MESSAGE_UI } from "../../lib/uiEvent";
 import MessageInput from "../../component/MessageInput";
 import MessageList from "../../component/MessageList";
+import NotificationCard from "../../component/NotificationCard";
 import {
   getMessages,
   getInputText,
@@ -43,6 +44,14 @@ export const HomeScreen = () => {
   const roomTopic = useSelector(getRoomTopic);
   const roomTopicIn = useSelector(getRoomTopicIn);
   const peersCount = useSelector(getPeersCount);
+
+  const [isNotificationVisible, setNotificationVisible] = useState(true);
+
+  const handleCloseNotification = () => setNotificationVisible(false);
+
+  useEffect(() => {
+    setNotificationVisible(true);
+  }, [roomTopic]);
 
   useEffect(() => {
     const messageListener = uiEvent.on(
@@ -111,14 +120,18 @@ export const HomeScreen = () => {
       >
         {roomTopic ? (
           <View style={styles.innerContainer}>
-            <View style={styles.topicContainer}>
+            <NotificationCard
+              onClose={handleCloseNotification}
+              isVisible={isNotificationVisible}
+            >
               <Text selectable style={styles.topicText}>
                 Topic: <Text style={styles.topicHighlight}>{roomTopic}</Text>
               </Text>
               <Text style={styles.peersText}>
                 Peers: <Text style={styles.peersCount}>{peersCount}</Text>
               </Text>
-            </View>
+            </NotificationCard>
+
             <MessageList messages={messages} />
             <MessageInput
               inputText={inputText}
@@ -128,33 +141,32 @@ export const HomeScreen = () => {
           </View>
         ) : (
           <View style={styles.innerContainer}>
-            <TouchableOpacity
-              style={[styles.message, styles.sendButton]}
-              onPress={handleCreate}
+            <NotificationCard
+              onClose={handleCloseNotification}
+              isVisible={isNotificationVisible}
             >
-              <Text>Create Room</Text>
-            </TouchableOpacity>
-            <Text>Or</Text>
-            <View style={styles.buttonGroup}>
-              <TextInput
-                value={roomTopicIn}
-                onChangeText={handleRoomTopicInChange}
-                style={styles.textInput}
-              />
-              <TouchableOpacity
-                style={[styles.message, styles.sendButton]}
-                onPress={handleJoin}
-              >
-                <Text>Join Room</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.info}>
-              <Text>
+              <Text style={styles.topicText}>
                 Open up src/screen/HomeScreen.js to start working on your app!
               </Text>
-              <Text>
+              <Text style={styles.topicText}>
                 FYR lib/rpc and worklet/app.cjs has related backend code.
               </Text>
+            </NotificationCard>
+            <View style={[styles.innerContainer, { gap: 16 }]}>
+              <TouchableOpacity style={styles.button} onPress={handleCreate}>
+                <Text style={styles.buttonText}>Create Room</Text>
+              </TouchableOpacity>
+              <Text style={styles.topicText}>Or</Text>
+              <View style={styles.buttonGroup}>
+                <TextInput
+                  value={roomTopicIn}
+                  onChangeText={handleRoomTopicInChange}
+                  style={styles.textInput}
+                />
+                <TouchableOpacity style={styles.button} onPress={handleJoin}>
+                  <Text style={styles.buttonText}>Join Room</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         )}
