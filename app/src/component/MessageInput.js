@@ -1,3 +1,4 @@
+import React from "react";
 import { TextInput, View, TouchableOpacity, StyleSheet } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
@@ -10,12 +11,12 @@ const MessageInput = ({ inputText, handleInputChange, handleSend }) => (
       onChangeText={handleInputChange}
     />
     <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
-      <MaterialIcons name="send" size={16} color="white" />
+      <MaterialIcons name="send" size={24} color="white" />
     </TouchableOpacity>
   </View>
 );
 
-export default MessageInput;
+export default React.memo(MessageInput);
 
 const styles = StyleSheet.create({
   inputContainer: {

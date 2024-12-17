@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 
 import {
   View,
@@ -15,17 +15,19 @@ if (Platform.OS === "android") {
     UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const renderMessage = ({ item }) => {
+const triggerLayoutAnimation = () => {
   LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+};
+
+const renderMessage = ({ item }) => {
+  triggerLayoutAnimation();
+
+  const messageStyle = item.local
+    ? [styles.message, styles.myMessage]
+    : [styles.message, styles.theirMessage];
 
   return (
-    <View
-      style={
-        item.local
-          ? [styles.message, styles.myMessage]
-          : [styles.message, styles.theirMessage]
-      }
-    >
+    <View style={messageStyle}>
       <Text style={styles.member}>{item?.memberId ?? "You"}</Text>
       <Text selectable>{item.message}</Text>
       <Text style={styles.timestamp}>
@@ -60,7 +62,7 @@ const MessageList = ({ messages }) => {
   );
 };
 
-export default MessageList;
+export default React.memo(MessageList);
 
 const styles = StyleSheet.create({
   message: {
