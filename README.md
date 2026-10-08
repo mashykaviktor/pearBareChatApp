@@ -35,9 +35,9 @@ The terminal peer (`terminal/index.js` and `terminal/chat-core.js`) is a second,
 
 This project is a focused exploration of a few specific engineering concepts rather than a full product:
 
-- **Peer-to-peer communication** using Hyperswarm/Hypercore-based discovery and connection — no application server mediates messages between peers.
+- **Peer-to-peer communication** using Hyperswarm for discovery and peer connections, with `hypercore-crypto` used to generate random room topics — no application server mediates messages between peers.
 - **Cross-runtime communication inside React Native**: the UI thread and a separate Bare "worklet" runtime run side by side, bridged by an explicit RPC request/reply protocol instead of implicit shared state.
-- **An explicit RPC boundary** (`app/src/lib/rpc.js` ↔ `app/worklet/api.mjs`/`api2.cjs`) with a shared, versioned set of command constants used by both sides.
+- **An explicit RPC boundary** (`app/src/lib/rpc.js` ↔ `app/worklet/api.mjs`/`api2.cjs`) with a shared set of command constants used by both sides.
 - **A mobile + terminal peer model**: the same transport logic is implemented twice (once embedded in a React Native worklet, once as a standalone Bare/Pear CLI), and both can interoperate in the same chat room.
 
 Hyperswarm, Hypercore, Bare, and Pear are third-party runtimes/libraries from the Holepunch ecosystem — this project uses them to build the sample, it does not implement or own that underlying networking stack.
